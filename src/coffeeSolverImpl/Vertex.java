@@ -1,8 +1,7 @@
 package coffeeSolverImpl;
 
-import lange.brandon.Locatable;
 
-public class Vertex implements Locatable{
+public class Vertex{
 	private int _id;
 	private double _lat;
 	private double _lon;
@@ -22,13 +21,10 @@ public class Vertex implements Locatable{
 		return _id;
 	}
 
-	@Override
-	public double getLatitude() {
+	public double lat(){
 		return _lat;
 	}
-
-	@Override
-	public double getLongitude() {
+	public double lon(){
 		return _lon;
 	}
 	

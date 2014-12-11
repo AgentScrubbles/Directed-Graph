@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
 
 import coffeeSolver.CoffeeSolver;
@@ -141,13 +140,11 @@ public class CoffeeSolverImpl<V, E> implements CoffeeSolver<V, E> {
 
 		Stack<Integer> _stack;
 		Graph<V, E> _graph;
-		boolean hasBackEdge;
 		Map<Integer, State> _stateMap;
 
 		public TopoProcessor(Graph<V, E> graph, Stack<Integer> stack) {
 			_stack = stack;
 			_graph = graph;
-			hasBackEdge = false;
 		}
 
 		@Override
@@ -161,7 +158,6 @@ public class CoffeeSolverImpl<V, E> implements CoffeeSolver<V, E> {
 			// Check for back edges
 			// If the edge -> targetID is in the path already, then it fails.
 			if (_stateMap.get(_graph.getTarget(edgeID)) == State.DISCOVERED) {
-				hasBackEdge = true;
 				_stack.clear();
 				throw new GraphException(edgeID, _graph.getAttribute(edgeID)
 						.toString());
@@ -173,13 +169,6 @@ public class CoffeeSolverImpl<V, E> implements CoffeeSolver<V, E> {
 			_stack.push(vertexID);
 		}
 
-		public boolean hasBackEdge() {
-			return hasBackEdge;
-		}
-
-		public Stack<Integer> getStack() {
-			return _stack;
-		}
 
 		@Override
 		public void setStateMap(Map<Integer, State> stateMap) {
