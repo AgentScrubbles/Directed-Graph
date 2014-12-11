@@ -11,6 +11,12 @@ public class GraphImpl<V, E> implements Graph<V, E>{
 	private Map<Integer, Vert> adjList;
 	private Map<Integer, Edge> edjList;
 	
+	/**
+	 * Internal class for edges.  This will store the generic E variable, it's source
+	 * and target.  hashCode will return the E hashcode function.
+	 * @author Robert
+	 *
+	 */
 	class Edge{
 		private E _e;
 		private int _src;
@@ -26,6 +32,12 @@ public class GraphImpl<V, E> implements Graph<V, E>{
 		}
 	}
 	
+	/**
+	 * Internal class for vertices. d Contains a hashmap of all connected edges.
+	 * From there connected vertices can be found.  hashcode will return V's hashcode.
+	 * @author Robert
+	 *
+	 */
 	class Vert{
 		private V _v;
 		private Map<Integer, Edge> _edges;
@@ -70,29 +82,27 @@ public class GraphImpl<V, E> implements Graph<V, E>{
 
 	@Override
 	public Set<Integer> getEdges() {
-		return edjList.keySet();
+		return edjList.keySet(); //All edges are located here.
 	}
 
 	@Override
 	public E getAttribute(int id) throws IllegalArgumentException {
-		return edjList.get(id)._e;
+		return edjList.get(id)._e; //Locates the edge by ID, returns the E.
 	}
 
 	@Override
 	public V getData(int id) throws IllegalArgumentException {
-		return adjList.get(id)._v;
+		return adjList.get(id)._v; //Finds the Vert from the ID, returns V.
 	}
 
 	@Override
 	public int getSource(int id) throws IllegalArgumentException {
-		Edge e = edjList.get(id);
-		return e._src;
+		return edjList.get(id)._src; //REturns the source of the edge
 	}
 
 	@Override
 	public int getTarget(int id) throws IllegalArgumentException {
-		Edge e = edjList.get(id);
-		return e._trg;
+		return edjList.get(id)._trg; //REturns the target of the edge
 	}
 
 	@Override
